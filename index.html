@@ -1,37 +1,33 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ New Year Glam Generator ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
+    <title>Golden Gala Generator 🥂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #1a0b2e; /* Dark Purple Night */
-            --card-bg: #ffffff;
-            --primary: #d4af37; /* Gold */
-            --secondary: #ffb7b2; /* Rose Gold/Pink */
-            --accent: #432c7a; /* Deep Purple */
-            --text-main: #2d2d2d;
-            --highlight: #fff0f5;
+            --bg-dark: #0f0f0f;
+            --card-dark: #1a1a1a;
+            --gold: #d4af37; /* Metallic Gold */
+            --gold-light: #f3e5ab;
+            --gold-hover: #b8860b;
+            --text-light: #f5f5f5;
+            --text-muted: #888;
         }
 
         body {
-            font-family: 'Fredoka', 'Kanit', sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            color: var(--text-main);
-            min-height: 100vh;
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
         }
 
         .container {
@@ -40,276 +36,304 @@
             text-align: center;
         }
 
-        .title-box {
-            margin-bottom: 30px;
-        }
-
         h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-            margin: 0;
         }
 
         p.subtitle {
-            color: #e0e0e0;
-            font-weight: 300;
-            margin-top: 5px;
-            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-style: italic;
+            border-bottom: 1px solid #333;
+            display: inline-block;
+            padding-bottom: 10px;
         }
 
-        /* Grid Layout */
+        /* Card Layout */
         .grid-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        /* Card Style */
         .slot-card {
-            background: var(--card-bg);
-            border-radius: 20px;
+            background: var(--card-dark);
+            border: 1px solid #333;
+            border-radius: 12px;
             padding: 20px;
             position: relative;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            border: 4px solid transparent;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            text-align: left;
         }
 
         .slot-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
             transform: translateY(-5px);
         }
 
-        /* Lock State */
         .slot-card.locked {
-            border-color: var(--primary);
-            background-color: #fff9e6;
+            border: 1px solid var(--gold);
+            background: linear-gradient(145deg, #1a1a1a, #25221b);
         }
 
-        .header-row {
+        .slot-card.locked::after {
+            content: "🔒 LOCKED";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
         }
 
         .label {
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            font-size: 0.9rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
+        /* Custom Lock Button */
         .lock-btn {
             background: none;
-            border: none;
-            font-size: 1.5rem;
+            border: 1px solid #444;
+            color: #666;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.2s;
-            opacity: 0.4;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: 0.3s;
         }
         
         .slot-card.locked .lock-btn {
-            opacity: 1;
-            transform: scale(1.1);
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
         }
 
-        /* Inputs */
-        input[type="number"] {
+        /* Custom Select */
+        select {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-family: 'Fredoka', sans-serif;
+            padding: 12px;
+            background-color: #0a0a0a;
+            color: #ccc;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-family: 'Lato', sans-serif;
             font-size: 1rem;
-            text-align: center;
-            box-sizing: border-box;
             outline: none;
+            cursor: pointer;
+            margin-bottom: 10px;
         }
-        input[type="number"]:focus {
-            border-color: var(--secondary);
-        }
+        select:focus { border-color: var(--gold); color: var(--gold); }
 
+        /* Display Value */
         .display-value {
             font-size: 1.1rem;
-            font-weight: 600;
-            color: #555;
+            color: #fff;
             min-height: 3em;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: #f8f8f8;
-            border-radius: 10px;
+            background-color: #222;
+            border-radius: 8px;
             padding: 10px;
-            line-height: 1.4;
+            border: 1px dashed #444;
+            margin-top: auto;
         }
-
         .slot-card.locked .display-value {
-            background-color: #fff;
-            color: var(--accent);
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            border-style: solid;
+            border-color: var(--gold);
+            color: var(--gold-light);
         }
 
         /* Result Area */
-        .result-box {
-            background: linear-gradient(135deg, #fff 0%, #fff0f5 100%);
+        .result-area {
+            background: #111;
             padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-            border: 2px solid var(--primary);
+            border-radius: 15px;
+            border: 1px solid #333;
             position: relative;
             margin-top: 20px;
         }
 
         #finalSentence {
-            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
             line-height: 1.6;
-            color: #333;
+            color: var(--gold-light);
             margin-bottom: 25px;
-            font-weight: 500;
+            font-style: italic;
         }
 
         /* Buttons */
-        .btn-group {
+        .btn-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .action-btn {
-            padding: 12px 40px;
+        .main-btn {
+            padding: 15px 40px;
             border: none;
             border-radius: 50px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
         }
 
         .spin-btn {
-            background: linear-gradient(45deg, #d4af37, #f3d060);
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #d4af37, #f3e5ab);
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
-        .spin-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
+        .spin-btn:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); }
 
         .copy-btn {
-            background: #fff;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
         }
-        .copy-btn:hover { background: var(--accent); color: #fff; }
+        .copy-btn:hover { background: var(--gold); color: #000; }
 
-        /* Mobile Adjust */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .grid-wrapper { grid-template-columns: 1fr; }
+        /* Animation */
+        @keyframes sparkle {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
+        .sparkle-text { animation: sparkle 2s infinite; }
 
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="title-box">
-            <h1>🥂 Happy New Year 2026 🥂</h1>
-            <p class="subtitle">Theme Generator for Women</p>
-        </div>
+        <h1>✨ LUXE NEW YEAR ✨</h1>
+        <p class="subtitle">The Ultimate Grand Celebration Prompt Generator</p>
 
         <div class="grid-wrapper" id="gridContainer">
             </div>
 
-        <div class="result-box">
-            <div id="finalSentence">READY TO PARTY? CLICK SPIN! ✨</div>
-            <div class="btn-group">
-                <button class="action-btn spin-btn" onclick="spinAll()">🎲 Random Spin</button>
-                <button class="action-btn copy-btn" onclick="copyResult()">📋 Copy Prompt</button>
+        <div class="result-area">
+            <div id="finalSentence" class="sparkle-text">Ready to celebrate? Click "GENERATE" below.</div>
+            <div class="btn-container">
+                <button class="main-btn spin-btn" onclick="spinAll()">🥂 Generate</button>
+                <button class="main-btn copy-btn" onclick="copyResult()">📋 Copy Prompt</button>
             </div>
         </div>
     </div>
 
     <script>
         // --- DATASETS ---
-        const data = {
-            theme: [
-                "Countdown Queen", "Fireworks Muse", "Champagne Pop Star", "Glitter Confetti Dreamer", "Midnight Rooftop Glam", "Times Square Inspired Sparkle", "Luxury Gala Darling", "Disco Ball Diva", "Sequin Street Style", "Neon Party Siren",
-                "Winter Wonderland Princess", "Snowy Cabin Cozy Chic", "Ski Resort Après Queen", "Ice Rink Fashion Babe", "Frozen Lake Stargazer", "Northern Lights Enchantress", "Hot Cocoa Couture", "Metallic Future Girl", "Cyber New Year Icon", "90s Pop Party Girl",
-                "Y2K Glitter Angel", "K-Pop Countdown Idol", "J-Pop City Lights Girl", "Bollywood New Year Dancer", "Carnival Celebration Beauty", "Masquerade Midnight Lady", "Red Envelope Lucky Girl", "Lunar New Year Chic", "Lantern Festival Glow", "Golden Hour Beach Countdown",
-                "Tropical New Year Traveler", "Island Resort Goddess", "Cruise Deck Celebration", "Poolside Fireworks Watcher", "Desert Luxury Camp NYE", "Starry Dunes Wanderer", "Mountain Lodge Romantic", "Forest Cabin Fairy Lights", "City Hotel Lobby Elegance", "Penthouse Party Host",
-                "Minimalist White NYE Look", "All-Black Sleek Midnight", "Gold Armor Glam", "Silver Chrome Siren", "Rose Gold Romance", "Emerald Lucky Charm", "Sapphire Night Queen", "Ruby Red Celebration", "Pearl New Year Classic", "Velvet Winter Goddess",
-                "Feather Trim Fashionista", "Fringe Dancefloor Girl", "Satin Slip Dress Star", "Tulle Party Princess", "Corset Glam Icon", "Power Suit Firework Boss", "Little Black Dress Legend", "Long Gown Ballroom Queen", "Mini Dress Club Darling", "Statement Coat Street Queen",
-                "Sparkly Knit Cozy Babe", "Pajama Party Cutie", "Sleepover NYE Bestie", "New Year Picnic Girl", "Brunch on Jan 1 Goddess", "Resolution Journal Muse", "Vision Board Creator", "Fresh Start Minimal Muse", "Self-Care Spa New Year", "Meditation Sunrise Girl",
-                "Yoga Retreat Traveler", "Temple Visit Blessing Look", "Lucky Charm Street Market Girl", "Street Food Night Fest Girl", "Festival Wristband Babe", "Concert Countdown Fan Girl", "DJ Booth Party Muse", "Karaoke Night Star", "Photo Booth Flash Queen", "Polaroid Party Nostalgia",
-                "Sparkler Hand Pose Queen", "Balloon Drop Celebration", "Confetti Cannon Moment", "Clock Tower Midnight Kiss", "Bridge Fireworks Watcher", "River Cruise Lantern Girl", "Harbor Pier Glam Traveler", "Ferris Wheel Midnight Ride", "Theme Park New Year Joy", "Museum After-Hours Chic",
-                "Art Gallery Champagne Night", "Theater New Year Premiere", "Opera House Glam", "Jazz Club Midnight Lady", "Speakeasy Vintage Babe", "Retro Diner Afterparty Girl", "Street Parade Queen", "Cultural Dress Celebration", "New Year Street Photographer", "Sunrise Hike “New Me” Girl"
-            ],
-            collab: [
-                "Fireworks", "Confetti", "Sparkler wand", "Champagne flute", "Party hat", "Disco ball", "LED balloon", "Metallic streamers", "Clock showing 11:59", "“2026” light numbers",
-                "New Year banner", "Photo booth props", "Polaroid camera", "Glitter fan (handheld)", "Feather boa", "Sequin clutch", "Star-shaped sunglasses", "Heart-shaped sunglasses", "Crown headband", "Rhinestone tiara",
-                "Oversized bow ribbon", "Lucky charm bracelet", "Red envelope", "Fortune cookie", "Lantern", "Fairy lights string", "Neon sign", "Mirror ball mini accessory", "Confetti popper", "Noise maker horn",
-                "Party whistle", "Gift box stack", "Wrapped bouquet", "Rose bouquet", "Glitter makeup palette", "Lipstick close-up prop", "Perfume bottle", "High heels display", "Statement earrings", "Layered necklaces",
-                "Ring stack close-up", "Luxury watch", "Handbag hero shot", "Suitcase (travel vibe)", "Passport + tickets", "Boarding pass", "Map + compass", "Travel journal", "Resolution list paper", "Vision board collage",
-                "Laptop “planner” scene", "Smartphone countdown screen", "Selfie ring light", "Tripod camera", "Film camera", "Vinyl record", "Portable speaker", "DJ headphones", "Microphone (karaoke)", "Guitar (street vibe)",
-                "Confetti cake", "Cupcakes tower", "Macaron box", "Chocolate truffles", "Fruit champagne tower", "Mocktail glass", "Hot cocoa mug", "Coffee cup “Jan 1”", "Brunch plate", "Sushi platter",
-                "Street food skewer", "Cotton candy", "Ice cream cone", "New Year cookies", "Snow globe", "Winter scarf", "Faux fur stole", "Knit beanie", "Ski goggles", "Ice skates",
-                "Snowboard", "Beach hat", "Sunglasses (beach)", "Seashell clutch", "Tropical flower lei", "Pool float", "Surfboard", "Camping lantern", "Tent + cozy blanket", "Telescope",
-                "Star map chart", "Bouquet of sparklers", "Bubble machine", "Smoke flare", "Confetti balloon (clear)", "Giant numbers balloon", "Party masks", "Fan with holographic foil", "Luxury car door detail", "City metro ticket / map"
-            ],
-            location: [
-                "Rooftop bar in a city skyline", "Luxury hotel lobby", "Penthouse balcony", "Downtown street countdown zone", "Times Square-style plaza", "Riverfront promenade", "Bridge viewpoint for fireworks", "Harbor pier with boats", "Marina yacht dock", "Cruise ship deck",
-                "Beachfront boardwalk", "Tropical island resort", "Infinity pool terrace", "Beach bonfire area", "Cliffside ocean viewpoint", "Mountain viewpoint platform", "Hilltop temple at sunrise", "City park with fairy lights", "Botanical garden light festival", "Winter market (holiday stalls)",
-                "Street food night market", "Carnival parade route", "Festival main stage", "Concert arena entrance", "Jazz club interior", "Speakeasy bar", "Nightclub dance floor", "Karaoke room", "Photo booth corner", "Art gallery after-hours",
-                "Museum night event", "Theater red carpet", "Opera house foyer", "Ballroom hall", "Luxury gala venue", "Wedding-style banquet hall", "Cozy cabin living room", "Snowy cabin porch", "Fireplace lounge", "Ski resort lodge",
-                "Ski lift station", "Snowy pine forest trail", "Frozen lake edge", "Ice rink outdoors", "Christmas/New Year light tunnel", "European old town square", "Castle courtyard", "Stone bridge in old city", "Cathedral steps", "Modern glass skyscraper plaza",
-                "Neon city street (Asia vibe)", "Shopping mall atrium", "Designer flagship store", "Street mural alley", "Sunset rooftop garden", "Sunrise beach walk", "Desert luxury camp", "Sand dune ridge", "Oasis pool", "Canyon viewpoint",
-                "Hot air balloon field", "Vineyard terrace", "Countryside cottage garden", "Lakeside cabin deck", "River cruise dock", "Floating market pier", "Lighthouse viewpoint", "Amusement park entrance", "Ferris wheel cabin", "Theme park fireworks zone",
-                "City metro station aesthetic", "Train platform at night", "Airport terminal travel chic", "Highway roadside neon motel", "Retro diner booth", "Coastal road lookout", "Mountain road switchback view", "Forest campsite", "Waterfall viewpoint", "Glasshouse conservatory",
-                "Minimal studio backdrop", "Abstract geometric set", "LED light cube room", "Mirror room installation", "Holographic hallway", "Star projector room", "Candlelit courtyard", "Lantern-lit alley", "Riverside lantern festival area", "Chinatown gate street",
-                "Fireworks launch field", "Stadium countdown event", "Beach club lounge", "Pool party venue", "Rooftop cinema", "Bookstore café (Jan 1 calm)", "Spa resort balcony", "Yoga retreat deck", "Snow mountain summit hut", "Coastal sunset pier cafe"
-            ]
-        };
+        const themes = [
+            "Midnight Champagne Empress", "Crystal Fireworks Diva", "Golden Hour Gala Queen", "Lunar New Year Luxe Muse", "Black-Tie Stardust Siren",
+            "Diamond Countdown Icon", "Velvet Ballroom Enchantress", "Pearl & Satin Celebration Lady", "Opulent New Year Masquerade Duchess", "Celestial Confetti Goddess",
+            "Rose-Gold Celebration Princess", "Platinum Glam Socialite", "Sparkling Sequin Heiress", "Baroque Toast Aristocrat", "Ice Queen of Midnight",
+            "Emerald Champagne Countess", "Ruby Firework Temptress", "High-Society Skyline Muse", "Swarovski Snowfall Siren", "New Year Opera House Diva",
+            "Art Deco Countdown Star", "Gala Red Carpet Empress", "Royal New Year Banquet Lady", "Champagne Tower Siren", "Diamond Tiara Countdown Queen",
+            "City Lights Couture Icon", "Winter Palace Celebration Empress", "Midnight Cruise Glam Captainess", "Luxe Lantern Festival Lady", "Orchestral New Year Muse",
+            "Glittering Aurora Duchess", "Silk & Gold New Year Muse", "Feathered Cape Firework Star", "Haute Couture Confetti Queen", "Pearl Crown Midnight Lady",
+            "Frosted Crystal Ballroom Muse", "Golden Ribbon Socialite", "New Year Cathedral Elegance", "Champagne & Roses Empress", "Jet-Black Velvet Countdown Muse",
+            "Starry Night Gala Heiress", "Metallic Mirrorball Icon", "New Year Rooftop Royalty", "Regal White & Gold Angel", "Sapphire Sparkle Countess",
+            "Crimson Velvet Firework Muse", "New Year Symphony Diva", "Luxury Casino Night Queen", "Couture Cape Celebration Lady", "Swarovski Fringe Goddess",
+            "Midnight Garden Party Duchess", "Champagne Moonlit Siren", "Imperial New Year Court Lady", "Golden Halo Celebration Muse", "Couture Pearl Veil Empress",
+            "Crystal Chandelier Queen", "New Year Ice Bar Glam Muse", "Firework Reflection Diva", "Opera Mask Celebration Duchess", "Royal Yacht Countdown Icon",
+            "Platinum & Onyx Socialite", "Luxe Velvet Bow Heiress", "Champagne Noir Femme Fatale", "Starburst Crown Gala Queen", "Golden Confetti High Priestess",
+            "Silvery Snow Globe Muse", "New Year Skyline Empress", "Glittering Grand Staircase Lady", "Luxury Hotel Lobby Diva", "New Year Candlelight Royalty",
+            "Mirage Sequin Desert Gala", "Winter Wonderland Empress", "Moonlit Mirror Palace Queen", "Champagne Lace Aristocrat", "Emerald Chandelier Siren",
+            "Grand Theatre Red Velvet Muse", "New Year Aurora Goddess", "Crystal Rose Celebration Lady", "Luxe Clocktower Countdown Muse", "High Jewelry Firework Queen",
+            "Golden Dragon New Year Muse", "Champagne Blossom Princess", "Luxe Star Map Enchantress", "Midnight Pearl Mermaid Glam", "Couture Rhinestone Royalty",
+            "Black & Gold Royal Masquerade", "Grand Cathedral Ball Duchess", "Golden Sunburst Heiress", "Luxe Winter Camellia Muse", "Champagne Diamond Coronation",
+            "Luxe Neon Skyline Diva", "Imperial Gold Leaf Empress", "Starlit River Cruise Queen", "Royal Champagne Library Gala", "Crystal Feather Celebration Muse",
+            "Grand Fountain Firework Lady", "New Year Crown Jewels Icon", "Platinum Snow Queen Gala", "Starfall Satin Duchess", "Ultimate New Year Grand Empress"
+        ];
 
+        const collabs = [
+            "Fireworks show", "Champagne tower", "Confetti cannon", "Luxury masquerade masks", "Live string quartet", "Grand piano performance", "Crystal chandelier installation", "Mirrorball disco", "Rose petal rain", "Golden ribbon swirl",
+            "Luxury car (limousine)", "Vintage convertible", "Superyacht detail", "Private jet stairway", "Red carpet paparazzi flash", "Velvet rope entrance", "High jewelry showcase", "Designer clutch spotlight", "Couture feather fan", "Opera gloves close-up",
+            "Diamond tiara moment", "Crown & scepter prop", "Golden clock “countdown” prop", "Giant numeral “2026” sculpture", "LED light sculpture", "Neon typography sign", "Champagne bottle pop", "Sparkler bouquet", "Star-shaped balloons", "Metallic balloon arch",
+            "Luxury gift boxes", "Perfume bottle glam", "Crystal perfume atomizer", "Makeup touch-up artist cameo", "Hair stylist backstage vibe", "Fashion runway spotlight", "Editorial magazine cover frame", "Film camera flash aesthetic", "Polaroid wall", "Luxury casino chips",
+            "Roulette wheel detail", "Poker table glam", "Golden confetti floor", "Silver glitter snowfall", "Snow globe prop", "Ice sculpture", "Frozen champagne bucket", "Caviar & blinis set", "Oyster bar display", "Dessert tower (macarons)",
+            "Chocolate fountain", "Luxury cake with gold leaf", "Rose bouquet cascade", "Orchid arrangement", "Sakura blossom decor", "Lotus lanterns", "Floating candles", "Candlelit aisle", "Champagne flute close-up", "Crystal coupe glass tower",
+            "Luxury watch close-up", "Diamond earrings highlight", "Pearl necklace spotlight", "High heels showcase", "Silk cape swirl", "Feather cape flutter", "Sequin dress sparkle macro", "Wind machine hair movement", "Slow-motion confetti", "Glitter makeup shimmer",
+            "Face gem details", "Metallic nail art close-up", "Luxury fanfare trumpet", "Orchestra conductor silhouette", "DJ booth glam", "Laser light grid", "Holographic backdrop", "Projection mapping wall", "Giant moon prop", "Star map ceiling",
+            "Aurora light beams", "City skyline reflection", "Rooftop helipad vibe", "Fountain fireworks synergy", "Luxury staircase descent", "Elevator doors reveal", "Balcony toast moment", "Champagne spray (stylized)", "Red roses + black satin theme", "White roses + gold theme",
+            "Black marble textures", "Gold foil textures", "Crystal curtain backdrop", "Velvet drape backdrop", "Mirror hallway illusion", "Grand library shelves", "Art gallery frames", "Luxury fragrance ad vibe", "High-fashion editorial crew", "Royal coronation tableau"
+        ];
+
+        const locations = [
+            "Five-star hotel grand lobby", "Rooftop bar with skyline", "Luxury penthouse terrace", "Opera house foyer", "Grand theatre backstage", "Ballroom with chandeliers", "Palace hall interior", "Museum gallery at night", "Private art gallery", "Luxury casino floor",
+            "High-end champagne lounge", "Winter garden conservatory", "Candlelit cathedral corridor", "Luxury spa atrium", "Private yacht deck", "Superyacht dining room", "River cruise deck at midnight", "Private jet hangar", "Airport VIP lounge", "Limo interior",
+            "Red carpet entrance stairs", "Marble grand staircase", "Mirror hallway luxury hotel", "Ice bar lounge", "Snowy alpine chalet terrace", "Mountain resort firepit lounge", "City bridge with fireworks view", "Waterfront promenade", "Luxury marina at night", "Infinity pool overlooking city",
+            "Desert luxury camp (glam)", "Glass dome observatory", "Rooftop helipad", "Skyline-view balcony", "Historic castle courtyard", "Royal garden at midnight", "Fountain plaza with lights", "High-rise sky lounge", "Private dining room (fine dining)", "Michelin-star kitchen doorway",
+            "Grand banquet hall", "New Year parade street (VIP balcony)", "Lantern festival riverside", "Fireworks viewing platform", "Luxury shopping arcade", "Designer boutique interior", "Jewelry store vault room", "Classic car showroom", "Art Deco hotel corridor", "Vintage cinema lobby",
+            "Luxury train compartment", "Train station VIP lounge", "Grand library reading hall", "Marble courtyard with arches", "Glass elevator atrium", "Rooftop greenhouse", "Botanical garden night event", "City skyline rooftop garden", "Ocean cliff lookout road", "Beach club at night",
+            "Lighthouse terrace", "Harbor with fireworks reflections", "Floating restaurant deck", "Luxury villa courtyard", "Private mansion ballroom", "Modern minimal mansion lobby", "High-end photo studio (editorial set)", "Crystal tunnel installation", "LED cube room", "Mirror room installation",
+            "Hologram exhibition hall", "Starry projection room", "Planetarium dome", "Observatory balcony", "Snowfield with aurora", "Frozen lake with lights", "Winter palace exterior steps", "City rooftop pool cabanas", "Fine wine cellar", "Champagne cave cellar",
+            "Rooftop garden gazebo", "Garden maze with lanterns", "Old town square with lights", "Luxury festival pavilion", "Grand pier at midnight", "Art museum rooftop", "Sculpture garden at night", "Glass bridge viewpoint", "Skywalk observation deck", "Grand clocktower terrace",
+            "New Year countdown plaza (VIP zone)", "Luxury rooftop restaurant", "Penthouse living room with skyline windows", "Luxury bathroom marble suite (editorial)", "Velvet draped stage set", "Black marble hall with gold accents", "White marble hall with crystal decor", "Atrium with hanging lights", "Cathedral steps with candlelight", "Royal courtyard with fireworks overhead"
+        ];
+
+        // Config
         const config = [
-            { id: "theme", label: "👸 Theme", data: data.theme, icon: "✨" },
-            { id: "collab", label: "👜 Collab Item", data: data.collab, icon: "🎒" },
-            { id: "location", label: "🎆 Location", data: data.location, icon: "🏰" }
+            { id: "theme", label: "💃 Luxury Theme", icon: "👑", data: themes },
+            { id: "collab", label: "🍾 Collab / Props", icon: "✨", data: collabs },
+            { id: "place", label: "🏰 Grand Location", icon: "🎆", data: locations }
         ];
 
         let state = {};
 
+        // Init
         function init() {
             const container = document.getElementById('gridContainer');
             config.forEach(cfg => {
-                state[cfg.id] = { locked: false, value: "" }; // Value empty initially
+                state[cfg.id] = { locked: false, value: "..." };
 
                 const card = document.createElement('div');
                 card.className = "slot-card";
                 card.id = `card-${cfg.id}`;
                 card.innerHTML = `
-                    <div class="header-row">
-                        <span class="label">${cfg.icon} ${cfg.label} (1-100)</span>
+                    <div class="card-header">
+                        <span class="label">${cfg.icon} ${cfg.label}</span>
                         <button class="lock-btn" id="lock-${cfg.id}" onclick="toggleLock('${cfg.id}')">🔓</button>
                     </div>
-                    <input type="number" id="input-${cfg.id}" min="1" max="100" placeholder="Type number..." oninput="handleInput('${cfg.id}')">
+                    <select id="select-${cfg.id}" onchange="handleSelect('${cfg.id}')">
+                        <option value="random">🎲 Randomize</option>
+                        ${cfg.data.map((item, i) => `<option value="${item}">${i+1}. ${item}</option>`).join('')}
+                    </select>
                     <div class="display-value" id="disp-${cfg.id}">...</div>
                 `;
                 container.appendChild(card);
             });
         }
 
+        // Toggle Lock
         function toggleLock(id) {
             state[id].locked = !state[id].locked;
             const btn = document.getElementById(`lock-${id}`);
@@ -324,98 +348,90 @@
             }
         }
 
-        function handleInput(id) {
-            const input = document.getElementById(`input-${id}`);
-            const disp = document.getElementById(`disp-${id}`);
-            const val = parseInt(input.value);
+        // Handle Select
+        function handleSelect(id) {
+            const select = document.getElementById(`select-${id}`);
+            const display = document.getElementById(`disp-${id}`);
+            const val = select.value;
 
-            if (val >= 1 && val <= 100) {
-                // User typed a valid number
-                const text = data[id][val - 1];
-                state[id].value = text;
-                disp.innerText = text;
-                // Optional: Auto lock if typed manually? Let's not, to allow overriding.
+            if (val !== "random") {
+                state[id].value = val;
+                display.innerText = val;
+                if (!state[id].locked) toggleLock(id); // Auto lock on select
             } else {
-                state[id].value = "";
-                disp.innerText = "...";
+                if (state[id].locked) toggleLock(id); // Unlock if random selected
+                display.innerText = "...";
             }
         }
 
+        // Spin
         function spinAll() {
+            const btn = document.querySelector('.spin-btn');
+            btn.disabled = true;
+            btn.innerHTML = "⏳ Celebrating...";
+
             config.forEach((cfg, index) => {
-                if (state[cfg.id].locked && state[cfg.id].value !== "") return;
+                if (state[cfg.id].locked) return;
+                
+                // Double check if dropdown is set to specific value but user unlocked it manually
+                const select = document.getElementById(`select-${cfg.id}`);
+                if (select.value !== "random") return;
 
-                // Check if input has a value, if so use that, otherwise random
-                const input = document.getElementById(`input-${cfg.id}`);
-                let valIndex;
-
-                if (input.value && !state[cfg.id].locked) {
-                    // If manually typed but not locked, we usually re-spin unless logic dictates otherwise. 
-                    // In "Random Spin", usually we overwrite unless locked.
-                    // Let's overwrite manual input if not locked.
-                    valIndex = Math.floor(Math.random() * 100);
-                    input.value = valIndex + 1; // Update input to show new number
-                } else if (state[cfg.id].locked) {
-                    return; // Do nothing
-                } else {
-                    valIndex = Math.floor(Math.random() * 100);
-                    input.value = valIndex + 1;
-                }
-
-                // Animation
-                const disp = document.getElementById(`disp-${cfg.id}`);
+                const display = document.getElementById(`disp-${cfg.id}`);
                 const pool = cfg.data;
                 let count = 0;
-                const speed = 50;
-                
+                let speed = 50;
+
                 const interval = setInterval(() => {
-                    disp.innerText = pool[Math.floor(Math.random() * 100)];
+                    display.innerText = pool[Math.floor(Math.random() * pool.length)];
                     count++;
-                    if (count > 8 + index) {
+                    if (count > 10 + index * 2) {
                         clearInterval(interval);
-                        const finalVal = pool[valIndex];
-                        disp.innerText = finalVal;
+                        const finalVal = pool[Math.floor(Math.random() * pool.length)];
+                        display.innerText = finalVal;
                         state[cfg.id].value = finalVal;
-                        if(index === config.length -1) generateSentence();
+
+                        if (index === config.length - 1) {
+                            btn.disabled = false;
+                            btn.innerHTML = "🥂 Generate";
+                            generateSentence();
+                        }
                     }
                 }, speed);
             });
+
+            // If all locked
+            if (config.every(c => state[c.id].locked)) {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = "🥂 Generate";
+                    generateSentence();
+                }, 300);
+            }
         }
 
         function generateSentence() {
-            // Check if all fields have values
             const v = {};
-            let allFilled = true;
-            config.forEach(cfg => {
-                if (!state[cfg.id].value) allFilled = false;
-                v[cfg.id] = state[cfg.id].value;
-            });
-
-            if (!allFilled) return;
-
-            // Format: Theme [1] with [2] at [3]
-            const sentence = `**Prompt:** ${v.theme} with ${v.collab} at ${v.location}`;
+            config.forEach(c => v[c.id] = state[c.id].value === "..." ? "(Random First)" : state[c.id].value);
             
-            const output = document.getElementById('finalSentence');
-            output.innerHTML = sentence;
-            output.dataset.raw = sentence.replace(/\*\*/g, '');
+            // Format: Theme + with Collab + in Location
+            const sentence = `${v.theme} with ${v.collab} in ${v.place}`;
+            document.getElementById('finalSentence').innerText = sentence;
         }
 
         function copyResult() {
-            const raw = document.getElementById('finalSentence').dataset.raw;
-            if (!raw) {
-                alert("Please click 'Random Spin' first! 🎉");
+            const text = document.getElementById('finalSentence').innerText;
+            if (text.includes("Ready")) {
+                alert("Please click GENERATE first!");
                 return;
             }
-            navigator.clipboard.writeText(raw).then(() => {
-                alert("Prompt copied to clipboard! 📋");
-            });
+            navigator.clipboard.writeText(text).then(() => alert("Prompt Copied! 🥂"));
         }
 
+        // Run
         init();
 
     </script>
 </body>
 </html>
-       
-             
+        
