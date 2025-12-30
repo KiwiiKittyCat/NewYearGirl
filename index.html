@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Year Glam Generator ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>✨ New Year Glam Generator ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fff0f3; /* Pink pastel */
+            --bg-color: #1a0b2e; /* Dark Purple Night */
             --card-bg: #ffffff;
-            --primary: #ffb7b2; /* Soft Red */
-            --secondary: #ffdac1; /* Peach */
-            --accent: #e2f0cb; /* Mint */
-            --text-color: #6d6d6d;
-            --gold: #d4af37;
+            --primary: #d4af37; /* Gold */
+            --secondary: #ffb7b2; /* Rose Gold/Pink */
+            --accent: #432c7a; /* Deep Purple */
+            --text-main: #2d2d2d;
+            --highlight: #fff0f5;
         }
 
         body {
-            font-family: 'Mali', cursive;
+            font-family: 'Fredoka', 'Kanit', sans-serif;
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle, #ffdac1 10%, transparent 11%), radial-gradient(circle, #ff9aa2 10%, transparent 11%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            color: var(--text-color);
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            color: var(--text-main);
+            min-height: 100vh;
             margin: 0;
-            padding: 20px;
             display: flex;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            padding: 20px;
         }
 
         .container {
@@ -36,128 +40,140 @@
             text-align: center;
         }
 
-        h1 {
-            color: #ff6f69;
-            font-size: 2.2rem;
-            text-shadow: 2px 2px 0px #fff;
-            margin-bottom: 5px;
-            background-color: rgba(255,255,255,0.9);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 3px dashed #ffb7b2;
+        .title-box {
+            margin-bottom: 30px;
         }
 
-        .subtitle {
-            font-family: 'Quicksand', sans-serif;
-            color: #888;
-            margin-bottom: 30px;
-            background-color: #fff;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 15px;
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            margin: 0;
+        }
+
+        p.subtitle {
+            color: #e0e0e0;
+            font-weight: 300;
+            margin-top: 5px;
+            font-size: 1rem;
         }
 
         /* Grid Layout */
         .grid-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
         /* Card Style */
-        .card {
+        .slot-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 8px 0 #f2e6e6, 0 10px 10px rgba(0,0,0,0.05);
-            border: 2px solid #fff;
-            transition: transform 0.2s;
             position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 4px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .card.locked {
-            border: 2px solid #ffb7b2;
-            background-color: #fff5f5;
+        .slot-card:hover {
+            transform: translateY(-5px);
         }
 
-        .card-header {
+        /* Lock State */
+        .slot-card.locked {
+            border-color: var(--primary);
+            background-color: #fff9e6;
+        }
+
+        .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 5px;
         }
 
         .label {
             font-weight: 600;
-            color: #ff6f69;
-            font-size: 1.1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
-        /* Lock Button */
         .lock-btn {
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
             transition: 0.2s;
-            opacity: 0.3;
+            opacity: 0.4;
         }
-        .lock-btn:hover { opacity: 0.7; transform: scale(1.1); }
-        .card.locked .lock-btn { opacity: 1; transform: scale(1.1); }
+        
+        .slot-card.locked .lock-btn {
+            opacity: 1;
+            transform: scale(1.1);
+        }
 
-        /* Input Number */
+        /* Inputs */
         input[type="number"] {
             width: 100%;
             padding: 10px;
             border: 2px solid #eee;
-            border-radius: 12px;
-            font-family: 'Quicksand', sans-serif;
+            border-radius: 10px;
+            font-family: 'Fredoka', sans-serif;
             font-size: 1rem;
             text-align: center;
-            outline: none;
             box-sizing: border-box;
+            outline: none;
         }
-        input[type="number"]:focus { border-color: #ffb7b2; }
+        input[type="number"]:focus {
+            border-color: var(--secondary);
+        }
 
-        /* Display Text */
-        .display-text {
-            min-height: 60px;
+        .display-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #555;
+            min-height: 3em;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: #555;
-            background-color: #f9f9f9;
-            border-radius: 12px;
+            text-align: center;
+            background-color: #f8f8f8;
+            border-radius: 10px;
             padding: 10px;
-            font-size: 1rem;
             line-height: 1.4;
         }
-        .card.locked .display-text {
-            color: #ff6f69;
-            background-color: #ffebeb;
+
+        .slot-card.locked .display-value {
+            background-color: #fff;
+            color: var(--accent);
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
         }
 
-        /* Result Section */
-        .result-area {
-            background: #fff;
-            padding: 25px;
+        /* Result Area */
+        .result-box {
+            background: linear-gradient(135deg, #fff 0%, #fff0f5 100%);
+            padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 4px solid #ffdac1;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--primary);
+            position: relative;
             margin-top: 20px;
         }
 
         #finalSentence {
             font-size: 1.2rem;
             line-height: 1.6;
-            color: #444;
-            margin-bottom: 20px;
-            word-wrap: break-word;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
         /* Buttons */
@@ -168,155 +184,138 @@
             flex-wrap: wrap;
         }
 
-        .btn {
-            padding: 12px 30px;
+        .action-btn {
+            padding: 12px 40px;
             border: none;
             border-radius: 50px;
-            font-family: 'Mali', cursive;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 5px 0 rgba(0,0,0,0.1);
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-transform: uppercase;
         }
 
         .spin-btn {
-            background-color: #ffb7b2;
-            color: white;
+            background: linear-gradient(45deg, #d4af37, #f3d060);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
         }
-        .spin-btn:hover { background-color: #ff9e99; transform: translateY(-2px); box-shadow: 0 7px 0 rgba(0,0,0,0.1); }
-        .spin-btn:active { transform: translateY(2px); box-shadow: none; }
+        .spin-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
 
         .copy-btn {
-            background-color: #b5ead7;
-            color: #555;
+            background: #fff;
+            color: var(--accent);
+            border: 2px solid var(--accent);
         }
-        .copy-btn:hover { background-color: #98e0c8; transform: translateY(-2px); box-shadow: 0 7px 0 rgba(0,0,0,0.1); }
-        .copy-btn:active { transform: translateY(2px); box-shadow: none; }
+        .copy-btn:hover { background: var(--accent); color: #fff; }
+
+        /* Mobile Adjust */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .grid-wrapper { grid-template-columns: 1fr; }
+        }
 
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🎉 New Year Glam Generator 🥂</h1>
-        <p class="subtitle">สุ่มธีมฉลองปีใหม่แบบตัวแม่ 2026</p>
-
-        <div class="grid-wrapper">
-            <div class="card" id="card-0">
-                <div class="card-header">
-                    <span class="label">🎆 1. Theme</span>
-                    <button class="lock-btn" onclick="toggleLock(0)" id="lock-0">🔓</button>
-                </div>
-                <input type="number" id="input-0" placeholder="1-100" min="1" max="100" oninput="manualInput(0)">
-                <div class="display-text" id="disp-0">...</div>
-            </div>
-
-            <div class="card" id="card-1">
-                <div class="card-header">
-                    <span class="label">🎒 2. Collab Item</span>
-                    <button class="lock-btn" onclick="toggleLock(1)" id="lock-1">🔓</button>
-                </div>
-                <input type="number" id="input-1" placeholder="1-100" min="1" max="100" oninput="manualInput(1)">
-                <div class="display-text" id="disp-1">...</div>
-            </div>
-
-            <div class="card" id="card-2">
-                <div class="card-header">
-                    <span class="label">👗 3. Outfit</span>
-                    <button class="lock-btn" onclick="toggleLock(2)" id="lock-2">🔓</button>
-                </div>
-                <input type="number" id="input-2" placeholder="1-100" min="1" max="100" oninput="manualInput(2)">
-                <div class="display-text" id="disp-2">...</div>
-            </div>
-
-            <div class="card" id="card-3">
-                <div class="card-header">
-                    <span class="label">🗽 4. Location</span>
-                    <button class="lock-btn" onclick="toggleLock(3)" id="lock-3">🔓</button>
-                </div>
-                <input type="number" id="input-3" placeholder="1-100" min="1" max="100" oninput="manualInput(3)">
-                <div class="display-text" id="disp-3">...</div>
-            </div>
+        <div class="title-box">
+            <h1>🥂 Happy New Year 2026 🥂</h1>
+            <p class="subtitle">Theme Generator for Women</p>
         </div>
 
-        <div class="result-area">
-            <div id="finalSentence">✨ กดปุ่ม "สุ่มธีม" เพื่อเริ่มความปัง! ✨</div>
+        <div class="grid-wrapper" id="gridContainer">
+            </div>
+
+        <div class="result-box">
+            <div id="finalSentence">READY TO PARTY? CLICK SPIN! ✨</div>
             <div class="btn-group">
-                <button class="btn spin-btn" onclick="spinAll()">🎲 สุ่มธีม (Spin)</button>
-                <button class="btn copy-btn" onclick="copyResult()">📋 คัดลอก (Copy)</button>
+                <button class="action-btn spin-btn" onclick="spinAll()">🎲 Random Spin</button>
+                <button class="action-btn copy-btn" onclick="copyResult()">📋 Copy Prompt</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- Data Sets ---
-        const themes = [
-            "Rooftop champagne countdown glamour", "Confetti storm street party vibe", "Fireworks silhouette on a bridge", "Sparkler close-up with bokeh lights", "Midnight kiss “almost” moment (playful)", "New Year resolution journal aesthetic", "Luxury hotel lobby grand entrance", "Disco ball dance-floor energy", "Golden hour “first sunrise of the year”", "City neon night-walk fashion shot",
-            "Cozy cabin countdown by fireplace", "Snowfall portrait with warm scarf", "Après-ski hot chocolate chic", "Ice rink twirl candid", "Mountain lookout fireworks far away", "Beach bonfire New Year chill", "Yacht deck midnight toast", "Poolside tropical New Year brunch", "Street food crawl at midnight", "Karaoke room celebration chaos",
-            "Lantern release wish-making scene", "Festival parade confetti crown", "Carnival lights + cotton candy mood", "Retro film-camera New Year diary", "90s rave-inspired glow sticks", "Minimal studio “2026” editorial", "Futuristic chrome + LED light strips", "Classic black-tie ballroom elegance", "Masquerade New Year mystery", "Red lipstick “midnight mirror” moment",
-            "Glitter makeup transformation before party", "“Outfit reveal” hallway runway", "Taxi window rain + city lights", "Hotel balcony champagne and skyline", "Train platform travel-to-a-new-year", "Airport terminal chic travel editorial", "Road trip sunrise in convertible", "Desert stargazing New Year wish", "Fire pit + marshmallow toast humor", "Party photo booth flash frenzy",
-            "Polaroid wall “year recap”", "Glitter tears “bittersweet goodbye year”", "Laughing candid with party hat tilt", "Balloon arch grand pose", "Number balloons “26” playful attitude", "New Year picnic at a park", "New Year market shopping montage", "Fancy dinner table toast shot", "Kitchen “midnight snacks” cozy vibe", "Baking New Year cookies in satin set",
-            "Spa day “fresh start” calm luxury", "Gym “new year new me” but stylish", "Coffee shop first latte of the year", "Bookstore resolution + cozy coat", "Museum night event elegance", "Street-style editorial with confetti boots", "Candlelit rooftop picnic + city haze", "Moonlit beach dress flutter", "Snow angel fashion (funny-cute)", "Fireworks reflection in sunglasses",
-            "Glitter heels on staircase close-up", "Earrings catch the light macro detail", "Hand holding “new year” ticket/pass", "Vintage limousine arrival drama", "Under umbrella with fireworks behind", "Glittering cape walk-through crowd", "Sequin blazer power pose", "Satin slip dress + leather jacket contrast", "Traditional cultural New Year attire pride", "Street festival face paint sparkle",
-            "“First dance of the year” motion blur", "“Last minute hairpin fix” backstage vibe", "Whispering a wish into a balloon", "Throwing confetti toward camera", "Popping a mini champagne bottle (safe/fun)", "Toasting with mocktail pastel vibes", "Midnight prayer/temple blessing calm", "Sunrise meditation on balcony", "Winter market mulled drink warmth", "Skyscraper elevator mirror selfie glam",
-            "City crosswalk flash photography editorial", "Golden fringe dress disco queen", "Velvet dress candlelight portrait", "Feather stole old-Hollywood New Year", "Minimal monochrome “clean slate” theme", "Rainbow sequins “hopeful year” vibe", "Silver chrome “future is now” vibe", "Pastel dream New Year brunch", "Floral “spring new year” garden party", "Rainy-night puddle reflections",
-            "Snowy streetlamp cinematic portrait", "Fireworks over riverboat scene", "Mountain chalet window-light portrait", "Carnival ferris wheel kiss-blown to camera", "Confetti in hair “messy but happy”", "Rooftop DJ set energy shot", "Silent disco headphones neon", "New Year charity event elegance", "“Vision board” wall collage session", "Packing suitcase “new adventures” teaser"
+        // --- DATASETS ---
+        const data = {
+            theme: [
+                "Countdown Queen", "Fireworks Muse", "Champagne Pop Star", "Glitter Confetti Dreamer", "Midnight Rooftop Glam", "Times Square Inspired Sparkle", "Luxury Gala Darling", "Disco Ball Diva", "Sequin Street Style", "Neon Party Siren",
+                "Winter Wonderland Princess", "Snowy Cabin Cozy Chic", "Ski Resort Après Queen", "Ice Rink Fashion Babe", "Frozen Lake Stargazer", "Northern Lights Enchantress", "Hot Cocoa Couture", "Metallic Future Girl", "Cyber New Year Icon", "90s Pop Party Girl",
+                "Y2K Glitter Angel", "K-Pop Countdown Idol", "J-Pop City Lights Girl", "Bollywood New Year Dancer", "Carnival Celebration Beauty", "Masquerade Midnight Lady", "Red Envelope Lucky Girl", "Lunar New Year Chic", "Lantern Festival Glow", "Golden Hour Beach Countdown",
+                "Tropical New Year Traveler", "Island Resort Goddess", "Cruise Deck Celebration", "Poolside Fireworks Watcher", "Desert Luxury Camp NYE", "Starry Dunes Wanderer", "Mountain Lodge Romantic", "Forest Cabin Fairy Lights", "City Hotel Lobby Elegance", "Penthouse Party Host",
+                "Minimalist White NYE Look", "All-Black Sleek Midnight", "Gold Armor Glam", "Silver Chrome Siren", "Rose Gold Romance", "Emerald Lucky Charm", "Sapphire Night Queen", "Ruby Red Celebration", "Pearl New Year Classic", "Velvet Winter Goddess",
+                "Feather Trim Fashionista", "Fringe Dancefloor Girl", "Satin Slip Dress Star", "Tulle Party Princess", "Corset Glam Icon", "Power Suit Firework Boss", "Little Black Dress Legend", "Long Gown Ballroom Queen", "Mini Dress Club Darling", "Statement Coat Street Queen",
+                "Sparkly Knit Cozy Babe", "Pajama Party Cutie", "Sleepover NYE Bestie", "New Year Picnic Girl", "Brunch on Jan 1 Goddess", "Resolution Journal Muse", "Vision Board Creator", "Fresh Start Minimal Muse", "Self-Care Spa New Year", "Meditation Sunrise Girl",
+                "Yoga Retreat Traveler", "Temple Visit Blessing Look", "Lucky Charm Street Market Girl", "Street Food Night Fest Girl", "Festival Wristband Babe", "Concert Countdown Fan Girl", "DJ Booth Party Muse", "Karaoke Night Star", "Photo Booth Flash Queen", "Polaroid Party Nostalgia",
+                "Sparkler Hand Pose Queen", "Balloon Drop Celebration", "Confetti Cannon Moment", "Clock Tower Midnight Kiss", "Bridge Fireworks Watcher", "River Cruise Lantern Girl", "Harbor Pier Glam Traveler", "Ferris Wheel Midnight Ride", "Theme Park New Year Joy", "Museum After-Hours Chic",
+                "Art Gallery Champagne Night", "Theater New Year Premiere", "Opera House Glam", "Jazz Club Midnight Lady", "Speakeasy Vintage Babe", "Retro Diner Afterparty Girl", "Street Parade Queen", "Cultural Dress Celebration", "New Year Street Photographer", "Sunrise Hike “New Me” Girl"
+            ],
+            collab: [
+                "Fireworks", "Confetti", "Sparkler wand", "Champagne flute", "Party hat", "Disco ball", "LED balloon", "Metallic streamers", "Clock showing 11:59", "“2026” light numbers",
+                "New Year banner", "Photo booth props", "Polaroid camera", "Glitter fan (handheld)", "Feather boa", "Sequin clutch", "Star-shaped sunglasses", "Heart-shaped sunglasses", "Crown headband", "Rhinestone tiara",
+                "Oversized bow ribbon", "Lucky charm bracelet", "Red envelope", "Fortune cookie", "Lantern", "Fairy lights string", "Neon sign", "Mirror ball mini accessory", "Confetti popper", "Noise maker horn",
+                "Party whistle", "Gift box stack", "Wrapped bouquet", "Rose bouquet", "Glitter makeup palette", "Lipstick close-up prop", "Perfume bottle", "High heels display", "Statement earrings", "Layered necklaces",
+                "Ring stack close-up", "Luxury watch", "Handbag hero shot", "Suitcase (travel vibe)", "Passport + tickets", "Boarding pass", "Map + compass", "Travel journal", "Resolution list paper", "Vision board collage",
+                "Laptop “planner” scene", "Smartphone countdown screen", "Selfie ring light", "Tripod camera", "Film camera", "Vinyl record", "Portable speaker", "DJ headphones", "Microphone (karaoke)", "Guitar (street vibe)",
+                "Confetti cake", "Cupcakes tower", "Macaron box", "Chocolate truffles", "Fruit champagne tower", "Mocktail glass", "Hot cocoa mug", "Coffee cup “Jan 1”", "Brunch plate", "Sushi platter",
+                "Street food skewer", "Cotton candy", "Ice cream cone", "New Year cookies", "Snow globe", "Winter scarf", "Faux fur stole", "Knit beanie", "Ski goggles", "Ice skates",
+                "Snowboard", "Beach hat", "Sunglasses (beach)", "Seashell clutch", "Tropical flower lei", "Pool float", "Surfboard", "Camping lantern", "Tent + cozy blanket", "Telescope",
+                "Star map chart", "Bouquet of sparklers", "Bubble machine", "Smoke flare", "Confetti balloon (clear)", "Giant numbers balloon", "Party masks", "Fan with holographic foil", "Luxury car door detail", "City metro ticket / map"
+            ],
+            location: [
+                "Rooftop bar in a city skyline", "Luxury hotel lobby", "Penthouse balcony", "Downtown street countdown zone", "Times Square-style plaza", "Riverfront promenade", "Bridge viewpoint for fireworks", "Harbor pier with boats", "Marina yacht dock", "Cruise ship deck",
+                "Beachfront boardwalk", "Tropical island resort", "Infinity pool terrace", "Beach bonfire area", "Cliffside ocean viewpoint", "Mountain viewpoint platform", "Hilltop temple at sunrise", "City park with fairy lights", "Botanical garden light festival", "Winter market (holiday stalls)",
+                "Street food night market", "Carnival parade route", "Festival main stage", "Concert arena entrance", "Jazz club interior", "Speakeasy bar", "Nightclub dance floor", "Karaoke room", "Photo booth corner", "Art gallery after-hours",
+                "Museum night event", "Theater red carpet", "Opera house foyer", "Ballroom hall", "Luxury gala venue", "Wedding-style banquet hall", "Cozy cabin living room", "Snowy cabin porch", "Fireplace lounge", "Ski resort lodge",
+                "Ski lift station", "Snowy pine forest trail", "Frozen lake edge", "Ice rink outdoors", "Christmas/New Year light tunnel", "European old town square", "Castle courtyard", "Stone bridge in old city", "Cathedral steps", "Modern glass skyscraper plaza",
+                "Neon city street (Asia vibe)", "Shopping mall atrium", "Designer flagship store", "Street mural alley", "Sunset rooftop garden", "Sunrise beach walk", "Desert luxury camp", "Sand dune ridge", "Oasis pool", "Canyon viewpoint",
+                "Hot air balloon field", "Vineyard terrace", "Countryside cottage garden", "Lakeside cabin deck", "River cruise dock", "Floating market pier", "Lighthouse viewpoint", "Amusement park entrance", "Ferris wheel cabin", "Theme park fireworks zone",
+                "City metro station aesthetic", "Train platform at night", "Airport terminal travel chic", "Highway roadside neon motel", "Retro diner booth", "Coastal road lookout", "Mountain road switchback view", "Forest campsite", "Waterfall viewpoint", "Glasshouse conservatory",
+                "Minimal studio backdrop", "Abstract geometric set", "LED light cube room", "Mirror room installation", "Holographic hallway", "Star projector room", "Candlelit courtyard", "Lantern-lit alley", "Riverside lantern festival area", "Chinatown gate street",
+                "Fireworks launch field", "Stadium countdown event", "Beach club lounge", "Pool party venue", "Rooftop cinema", "Bookstore café (Jan 1 calm)", "Spa resort balcony", "Yoga retreat deck", "Snow mountain summit hut", "Coastal sunset pier cafe"
+            ]
+        };
+
+        const config = [
+            { id: "theme", label: "👸 Theme", data: data.theme, icon: "✨" },
+            { id: "collab", label: "👜 Collab Item", data: data.collab, icon: "🎒" },
+            { id: "location", label: "🎆 Location", data: data.location, icon: "🏰" }
         ];
 
-        const collabs = [
-            "Fireworks bouquet", "Confetti cannon burst", "Giant number balloons", "Champagne flute tower", "Sparkler wand", "Party hat crown", "Disco ball prop", "LED neon sign “NEW YEAR”", "Fairy light curtain", "Glitter fan (handheld)",
-            "Metallic streamers", "Snow globe prop", "Countdown clock backdrop", "Gift boxes stack", "Ribbon curls everywhere", "Balloon arch", "Photo booth frame", "Polaroid camera", "Instant film prints", "“Year recap” collage board",
-            "Fortune cookie / wish note", "Lanterns (paper)", "Floating candles", "Rose bouquet (midnight romance)", "Heart-shaped confetti", "Star-shaped confetti", "Gold foil backdrop", "Silver foil backdrop", "Mirror ball earrings close-up focus", "Sequin clutch bag",
-            "Metallic heels highlight", "Glitter nail art macro", "Cocktail shaker", "Mocktail garnish set (lime, mint)", "Dessert tower (macarons)", "Cupcake fireworks toppers", "Chocolate fountain vibe", "Cotton candy cloud", "Street food skewer set", "Hot cocoa mug + marshmallows",
-            "Cozy blanket scarf swirl", "Vintage car cameo", "Convertible road-trip prop", "Suitcase + boarding pass aesthetic", "Train ticket + map", "Passport stamps collage", "City map with highlighted route", "Camera flash paparazzi effect", "Film light leaks overlay", "Fog machine haze",
-            "Confetti in hair comb", "Hair glitter spray", "Crown tiara prop", "Feather boa", "Satin gloves", "Pearl necklace focus", "Statement chandelier earrings", "Metallic cape", "Umbrella with light reflections", "Snowflakes (artificial)",
-            "Ice crystals on branches", "Pine garland decor", "Wreath (modern minimal)", "Candle centerpiece", "Table setting with name cards", "Velvet chair + luxe room", "Rooftop railing + skyline", "Light-up bracelet/glow sticks", "Silent-disco headphones", "DJ turntable prop",
-            "Vinyl record aesthetic", "Karaoke microphone", "Confetti popper in hand", "Balloon animal (funny)", "Giant teddy bear (cute)", "Cat or small dog cameo (adorable)", "Flower petals rain", "Star projector lights", "Laser light beams", "Paper crowns (friends)",
-            "Champagne bottle with ribbon (closed/posed)", "New Year cards set", "“Goals” checklist clipboard", "Vision board magazine cutouts", "Calendar page flip prop", "Hourglass “time” concept", "Pocket watch vintage", "Street sign “2026” custom", "Confetti-filled transparent balloons", "Glittered “HELLO” speech bubble prop",
-            "“GOODBYE” speech bubble prop", "Mini mirror compact", "Perfume bottle glam close-up", "High heels on staircase shot", "Sequin jacket on coat rack", "Hotel key card prop", "Snowy mug steam effect", "Fire pit sparks in background", "Ferris wheel lights cameo", "Fountain fireworks (sparklers-like decor)"
-        ];
+        let state = {};
 
-        const outfits = [
-            "Black sequin mini dress", "Gold sequin slip dress", "Silver metallic bodycon dress", "Velvet wrap dress", "Satin bias-cut slip dress", "One-shoulder gown", "Off-shoulder cocktail dress", "High-slit evening gown", "Feather-trim party dress", "Fringe flapper-inspired dress",
-            "Tuxedo blazer dress", "White suit (power look)", "Red blazer + matching trousers", "Sparkly bodysuit + wide-leg pants", "Corset top + satin skirt", "Mesh sparkle top + mini skirt", "Crystal-embellished top + jeans", "Leather jacket + glitter dress", "Denim jacket + satin slip", "Chunky knit sweater + sequin skirt",
-            "Turtleneck + tailored trousers", "Long coat + evening dress", "Faux fur coat + mini dress", "Cape coat + heels", "Puffer jacket + winter mini", "Ski suit show-off (fashion ski)", "Après-ski sweater dress + boots", "Thermal set + long wool coat", "Knit midi dress + belt", "Pleated metallic midi skirt + blouse",
-            "Satin blouse + leather pants", "Lace top + high-waist trousers", "Sheer blouse + bralette + blazer", "Sparkle cardigan + mini skirt", "Jumpsuit with glitter fabric", "Velvet jumpsuit", "White satin jumpsuit", "Wide-leg jumpsuit with belt", "Halter-neck party dress", "Backless dress",
-            "Cutout dress (tasteful)", "Off-white monochrome set", "Pastel suit set", "Tweed jacket + mini skirt set", "Knit co-ord + boots", "Mini dress + thigh-high boots", "Midi dress + ankle boots", "Long skirt + fitted top", "High-waist shorts + blazer + tights", "Pleather skirt + turtleneck",
-            "Shimmer tights + little black dress", "Rhinestone fishnet tights + blazer dress", "Statement trench coat + heels", "Satin trench + slip dress", "Oversized blazer + corset + jeans", "Cropped jacket + satin maxi", "Long cardigan + silk cami + trousers", "Boho maxi dress + leather jacket", "Floral midi + wool coat", "Minimal black knit set + gold jewelry",
-            "White knit set + silver jewelry", "Emerald dress + velvet heels", "Sapphire dress + crystal earrings", "Champagne-colored dress + nude heels", "Monochrome beige travel chic", "Airport look: hoodie + trench + sneakers", "Airport look: knit set + long coat", "Airport look: blazer + joggers", "Beach New Year: linen set", "Beach New Year: crochet dress",
-            "Resort: satin co-ord + sandals", "Resort: maxi skirt + bikini top + shirt", "City travel: leather trench + boots", "City travel: wool blazer + scarf", "Street party: bomber jacket + glitter top", "Street party: denim + sequins mix", "Retro 70s: flared pants + sparkly top", "Retro 80s: shoulder pads + metallic skirt", "90s: slip dress + chunky boots", "Y2K: glitter top + low-rise trousers",
-            "Minimalist: column dress + sleek hair", "Romantic: tulle skirt + satin top", "Preppy: cardigan set + pearls", "Edgy: all-black leather + silver accents", "Gothic glam: velvet + lace mix", "Soft glam: pastel satin + pearls", "Futuristic: chrome jacket + boots", "Sporty glam: track pants + corset top", "Cultural-inspired: embroidered long dress", "Cultural-inspired: silk wrap + statement belt",
-            "Cape dress (dramatic)", "High-neck dress + open back", "Asymmetric hem dress", "Blazer + midi skirt + heels", "Knit top + satin midi + pumps", "Sequined blazer + black trousers", "Statement coat + simple black dress", "Sparkly shawl + evening gown", "Rhinestone dress (subtle cut)", "Little white dress + gold accessories"
-        ];
+        function init() {
+            const container = document.getElementById('gridContainer');
+            config.forEach(cfg => {
+                state[cfg.id] = { locked: false, value: "" }; // Value empty initially
 
-        const locations = [
-            "Rooftop bar overlooking a skyline", "Downtown street countdown zone", "City bridge over a river", "Riverwalk promenade", "Luxury hotel balcony", "Hotel grand lobby", "Ballroom event hall", "Private penthouse terrace", "Beachfront bonfire area", "Tropical resort pool deck",
-            "Yacht marina at night", "Lighthouse lookout point", "Mountain cabin porch", "Snowy pine forest trail", "Ski resort village square", "Ice rink in a plaza", "Winter market street", "Cozy café with warm lights", "Night bazaar walkway", "Food truck festival lot",
-            "Amusement park entrance", "Ferris wheel viewpoint", "Carnival midway lights", "Fireworks viewing hill", "Lakeside pier", "Desert campsite under stars", "Sand dunes viewpoint", "Botanical garden night lights show", "Museum night event space", "Art gallery opening",
-            "Theater lobby / red carpet", "Concert venue entrance", "DJ club dance floor", "Silent disco outdoor lawn", "Photo booth corner in a party hall", "Minimal studio with seamless backdrop", "Neon-lit alley street-style spot", "Chinatown lantern street", "Temple courtyard blessing scene", "Riverside temple walkway",
-            "Old town cobblestone street", "Historic district balcony", "Castle-like hotel exterior", "Vineyard evening terrace", "Countryside barn party venue", "Farm field with fairy lights", "City park picnic lawn", "Rose garden gazebo", "Waterfront boardwalk", "Harbor pier with boats",
-            "Mountain cliff viewpoint", "Waterfall overlook platform", "Scenic train station platform", "Inside a modern train carriage", "Airport departure hall", "Airport skybridge window view", "Highway rest stop neon sign", "Desert highway roadside viewpoint", "Coastal highway lookout", "Rainy city street with puddles",
-            "Umbrella-lined pedestrian street", "Rooftop greenhouse restaurant", "Glass conservatory dome", "Luxury spa courtyard", "Hot spring resort walkway", "Candlelit restaurant terrace", "Wine bar corner booth", "Jazz lounge stage area", "Retro diner booth", "Bowling alley neon vibe",
-            "Karaoke room neon glow", "Arcade with colorful lights", "Open-air night cinema", "Seaside cliff restaurant", "Beach swing under palm trees", "Floating market dock", "Riverboat deck", "Cruise ship promenade", "City observation deck", "Skywalk glass floor",
-            "Cathedral square (open plaza)", "Monument roundabout viewpoint", "Sculpture garden", "Modern architecture plaza", "Minimal concrete rooftop", "LED tunnel walkway installation", "Light festival installation street", "Floating lantern festival lakeside", "Snowy village main street", "Christmas-to-New-Year decorated boulevard",
-            "Fireworks launch field perimeter", "Stadium celebration zone", "University campus courtyard (quiet vibe)", "Library reading nook (resolution theme)", "Bookstore aisle with warm lamps", "Flower market alley", "Luxury boutique street corner", "Scenic cliffside hotel infinity pool", "Rooftop garden with fairy lights", "Sunrise beach shoreline (first morning)"
-        ];
+                const card = document.createElement('div');
+                card.className = "slot-card";
+                card.id = `card-${cfg.id}`;
+                card.innerHTML = `
+                    <div class="header-row">
+                        <span class="label">${cfg.icon} ${cfg.label} (1-100)</span>
+                        <button class="lock-btn" id="lock-${cfg.id}" onclick="toggleLock('${cfg.id}')">🔓</button>
+                    </div>
+                    <input type="number" id="input-${cfg.id}" min="1" max="100" placeholder="Type number..." oninput="handleInput('${cfg.id}')">
+                    <div class="display-value" id="disp-${cfg.id}">...</div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-        const allData = [themes, collabs, outfits, locations];
-        let locked = [false, false, false, false];
-
-        // --- Functions ---
-
-        function toggleLock(index) {
-            locked[index] = !locked[index];
-            const btn = document.getElementById(`lock-${index}`);
-            const card = document.getElementById(`card-${index}`);
+        function toggleLock(id) {
+            state[id].locked = !state[id].locked;
+            const btn = document.getElementById(`lock-${id}`);
+            const card = document.getElementById(`card-${id}`);
             
-            if (locked[index]) {
+            if (state[id].locked) {
                 btn.innerText = "🔒";
                 card.classList.add('locked');
             } else {
@@ -325,100 +324,98 @@
             }
         }
 
-        function manualInput(index) {
-            const input = document.getElementById(`input-${index}`);
-            let val = parseInt(input.value);
-            
+        function handleInput(id) {
+            const input = document.getElementById(`input-${id}`);
+            const disp = document.getElementById(`disp-${id}`);
+            const val = parseInt(input.value);
+
             if (val >= 1 && val <= 100) {
-                // If input is valid, lock the card temporarily to show this choice
-                // But conceptually, we just update the display
-                const text = allData[index][val - 1];
-                document.getElementById(`disp-${index}`).innerText = text;
+                // User typed a valid number
+                const text = data[id][val - 1];
+                state[id].value = text;
+                disp.innerText = text;
+                // Optional: Auto lock if typed manually? Let's not, to allow overriding.
             } else {
-                document.getElementById(`disp-${index}`).innerText = "...";
+                state[id].value = "";
+                disp.innerText = "...";
             }
         }
 
         function spinAll() {
-            const btn = document.querySelector('.spin-btn');
-            btn.disabled = true;
-            btn.innerText = "⏳ กำลังสุ่ม...";
+            config.forEach((cfg, index) => {
+                if (state[cfg.id].locked && state[cfg.id].value !== "") return;
 
-            // Helper to get random number
-            const random100 = () => Math.floor(Math.random() * 100) + 1;
+                // Check if input has a value, if so use that, otherwise random
+                const input = document.getElementById(`input-${cfg.id}`);
+                let valIndex;
 
-            // Loop through each card
-            for (let i = 0; i < 4; i++) {
-                // Skip if locked
-                if (locked[i]) continue;
+                if (input.value && !state[cfg.id].locked) {
+                    // If manually typed but not locked, we usually re-spin unless logic dictates otherwise. 
+                    // In "Random Spin", usually we overwrite unless locked.
+                    // Let's overwrite manual input if not locked.
+                    valIndex = Math.floor(Math.random() * 100);
+                    input.value = valIndex + 1; // Update input to show new number
+                } else if (state[cfg.id].locked) {
+                    return; // Do nothing
+                } else {
+                    valIndex = Math.floor(Math.random() * 100);
+                    input.value = valIndex + 1;
+                }
 
-                // Also, if user manually typed a number, we might want to respect it?
-                // But the button says "Spin", so usually that overrides manual unless locked.
-                // Let's override manual unless locked.
+                // Animation
+                const disp = document.getElementById(`disp-${cfg.id}`);
+                const pool = cfg.data;
+                let count = 0;
+                const speed = 50;
                 
-                // Animation effect
-                const inputEl = document.getElementById(`input-${i}`);
-                const dispEl = document.getElementById(`disp-${i}`);
-                const dataSet = allData[i];
-
-                let counter = 0;
-                let speed = 50;
                 const interval = setInterval(() => {
-                    const tempIndex = Math.floor(Math.random() * 100);
-                    dispEl.innerText = dataSet[tempIndex];
-                    inputEl.value = tempIndex + 1;
-                    counter++;
-                    if (counter > 10) {
+                    disp.innerText = pool[Math.floor(Math.random() * 100)];
+                    count++;
+                    if (count > 8 + index) {
                         clearInterval(interval);
-                        // Final set
-                        const finalNum = random100();
-                        inputEl.value = finalNum;
-                        dispEl.innerText = dataSet[finalNum - 1];
+                        const finalVal = pool[valIndex];
+                        disp.innerText = finalVal;
+                        state[cfg.id].value = finalVal;
+                        if(index === config.length -1) generateSentence();
                     }
                 }, speed);
-            }
-
-            // Re-enable button after animation
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerText = "🎲 สุ่มธีม (Spin)";
-                generateSentence();
-            }, 600);
+            });
         }
 
         function generateSentence() {
-            // Get values from display elements
-            const t = document.getElementById('disp-0').innerText;
-            const c = document.getElementById('disp-1').innerText;
-            const o = document.getElementById('disp-2').innerText;
-            const l = document.getElementById('disp-3').innerText;
+            // Check if all fields have values
+            const v = {};
+            let allFilled = true;
+            config.forEach(cfg => {
+                if (!state[cfg.id].value) allFilled = false;
+                v[cfg.id] = state[cfg.id].value;
+            });
 
-            if (t === "..." || c === "..." || o === "..." || l === "...") {
-                return; // Not ready
-            }
+            if (!allFilled) return;
 
-            // Construct Sentence
-            const sentence = `**Prompt:** as ${t} collab ${c} with ${o} in ${l}`;
-            document.getElementById('finalSentence').innerText = sentence;
+            // Format: Theme [1] with [2] at [3]
+            const sentence = `**Prompt:** ${v.theme} with ${v.collab} at ${v.location}`;
+            
+            const output = document.getElementById('finalSentence');
+            output.innerHTML = sentence;
+            output.dataset.raw = sentence.replace(/\*\*/g, '');
         }
 
         function copyResult() {
-            const text = document.getElementById('finalSentence').innerText;
-            if (text.includes("กดปุ่ม")) {
-                alert("กรุณากดสุ่มก่อนนะครับ ✨");
+            const raw = document.getElementById('finalSentence').dataset.raw;
+            if (!raw) {
+                alert("Please click 'Random Spin' first! 🎉");
                 return;
             }
-            // Remove "**Prompt:** " for cleaner copy if desired, or keep it.
-            // Let's copy the raw text for AI generation.
-            const cleanText = text.replace("**Prompt:** ", "");
-            
-            navigator.clipboard.writeText(cleanText).then(() => {
-                alert("คัดลอกเรียบร้อย! 🥂");
+            navigator.clipboard.writeText(raw).then(() => {
+                alert("Prompt copied to clipboard! 📋");
             });
         }
+
+        init();
 
     </script>
 </body>
 </html>
-
-          
+       
+             
